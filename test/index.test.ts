@@ -3,10 +3,11 @@
 import process from 'node:process'
 import { describe, expect, it } from 'vitest'
 import MarkdownIt from 'markdown-it'
+import { format } from 'prettier'
 import MarkdownItMdc from '../src'
 
 describe('should', () => {
-  const files = import.meta.glob('./input/*.md', { as: 'raw' })
+  const files = import.meta.glob('./input/*.md', { as: 'raw', eager: true })
   const filter = process.env.FILTER
   Object.entries(files)
     .forEach(([path, content]) => {
@@ -22,7 +23,12 @@ describe('should', () => {
         })
         md.use(MarkdownItMdc)
 
-        expect(md.render(await content()))
+        const rendered = md.render(content)
+        const formatted = await format(rendered, {
+          parser: 'html',
+        })
+
+        expect(formatted)
           .toMatchFileSnapshot(path.replace('input', 'output').replace('.md', '.html'))
       })
     })

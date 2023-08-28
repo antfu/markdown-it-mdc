@@ -1,7 +1,16 @@
 <h1>Hello</h1>
-<p><em>Hello</em> <strong>World</strong> from <a href="https://github.com/antfu/markdown-it-mdc"><code>markdown-it-mdc</code></a>!</p>
+<p>
+  <em>Hello</em> <strong>World</strong> from
+  <a href="https://github.com/antfu/markdown-it-mdc"
+    ><code>markdown-it-mdc</code></a
+  >!
+</p>
 <blockquote>
-<p>This file contains the basic Markdown syntaxes with <code>html: true</code> and <code>xhtmlOut: true</code> enabled. It's mainly served as fixture for false positives of the mdc plugin:</p>
+  <p>
+    This file contains the basic Markdown syntaxes with
+    <code>html: true</code> and <code>xhtmlOut: true</code> enabled. It's mainly
+    served as fixture for false positives of the mdc plugin:
+  </p>
 </blockquote>
 <pre><code class="language-bash">npm i markdown-it-mdc
 </code></pre>
@@ -13,9 +22,7 @@ const md = new MarkdownIt()
   .use(mdc)
 </code></pre>
 <Counter :count="1" />
-<CustomComponent>
-  Nested <Counter @click="foo" />
-</CustomComponent>
+<CustomComponent> Nested <Counter @click="foo" /> </CustomComponent>
 <style scoped>
   .mdc-button {
     background-color: #ff0000;
