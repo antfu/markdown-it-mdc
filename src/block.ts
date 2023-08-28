@@ -50,6 +50,7 @@ export function MarkdownItMdcBlock(md: MarkdownIt, options: MdcBlockOptions) {
     let auto_closed = false
     let start = state.bMarks[startLine] + state.tShift[startLine]
     let max = state.eMarks[startLine]
+    const indent = state.sCount[startLine]
 
     // Check out the first character quickly,
     // this should filter out most of non-containers
@@ -136,6 +137,7 @@ export function MarkdownItMdcBlock(md: MarkdownIt, options: MdcBlockOptions) {
     state.lineMax = nextLine
 
     token = state.push(`mdc_block_${name}_open`, params.name, 1) as ExtendToken
+    // TODO: add attributes
     token.markup = markup
     token.block = true
     token.info = params.name
@@ -146,7 +148,10 @@ export function MarkdownItMdcBlock(md: MarkdownIt, options: MdcBlockOptions) {
       level: marker_count - 1,
     }
 
+    const blkIndent = state.blkIndent
+    state.blkIndent = indent
     state.md.block.tokenize(state, startLine + 1, nextLine)
+    state.blkIndent = blkIndent
 
     token = state.push(`mdc_block_${name}_close`, params.name, -1)
     token.markup = state.src.slice(start, pos)

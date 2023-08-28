@@ -1,10 +1,15 @@
 <hero>
   <card>
-    <pre><code>A nested card
-
-::::card
-  A super nested card
-::::
-</code></pre>
+    <p>A nested card</p>
+    <card>
+      <p>A <strong>super</strong> nested card</p>
+    </card>
   </card>
 </hero>
+<card>
+  <p>A card</p>
+</card>
+<pre><code>::hero
+Indent 4 spaces, should be treated as code block
+::
+</code></pre>
