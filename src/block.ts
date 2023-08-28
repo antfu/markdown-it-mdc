@@ -12,8 +12,8 @@ export interface MdcBlockOptions {
 
 export interface ExtendToken extends Token {
   mdc?: {
-    blockName: string
-    params: string
+    name: string
+    props?: [string, string][]
     level: number
   }
 }
@@ -137,22 +137,32 @@ export function MarkdownItMdcBlock(md: MarkdownIt, options: MdcBlockOptions) {
     state.lineMax = nextLine
 
     token = state.push(`mdc_block_${name}_open`, params.name, 1) as ExtendToken
-    // TODO: add attributes
     token.markup = markup
     token.block = true
     token.info = params.name
     token.map = [startLine, nextLine]
     token.mdc = {
-      blockName: params.name,
-      params: params.params,
+      name: params.name,
+      props: params.props,
       level: marker_count - 1,
     }
+    // Add props
+    if (params.props) {
+      params.props.forEach(([key, value]) => {
+        if (key === 'class')
+          token.attrJoin(key, value)
+        else
+          token.attrSet(key, value)
+      })
+    }
 
+    // Parse content
     const blkIndent = state.blkIndent
     state.blkIndent = indent
     state.md.block.tokenize(state, startLine + 1, nextLine)
     state.blkIndent = blkIndent
 
+    // Ending Tag
     token = state.push(`mdc_block_${name}_close`, params.name, -1)
     token.markup = state.src.slice(start, pos)
     token.block = true
