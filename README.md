@@ -10,13 +10,14 @@
 
 ## Progress
 
-- [x] Block Component
+- [x] [Block Component](https://remark-mdc.nuxt.space/#block-components)
   - [x] [Nesting](https://remark-mdc.nuxt.space/#nesting)
-  - [ ] [YAML Props](https://remark-mdc.nuxt.space/#yaml-props)
+  - [x] [YAML Props](https://remark-mdc.nuxt.space/#yaml-props)
   - [x] [Slots](https://remark-mdc.nuxt.space/#slots)
 - [x] [Inline Components](https://remark-mdc.nuxt.space/#inline-components)
 - [x] [Inline Props](https://remark-mdc.nuxt.space/#inline-props)
 - [x] [Span](https://remark-mdc.nuxt.space/#span)
+- [ ] Test compatibility with other markdown-it plugins
 
 ## Sponsors
 

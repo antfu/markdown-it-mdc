@@ -150,10 +150,11 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginWithOptions<MdcBlockOptions> =
     // Parse content
     const blkIndent = state.blkIndent
     state.blkIndent = indent
-    state.env.mdcBlock = (state.env.mdcBlock || 0) + 1
+    state.env.mdcBlockTokens ||= [] as Token[]
+    state.env.mdcBlockTokens.unshift(token)
     state.md.block.tokenize(state, startLine + 1, nextLine)
     state.blkIndent = blkIndent
-    state.env.mdcBlock -= 1
+    state.env.mdcBlockTokens.shift(token)
 
     // Ending Tag
     token = state.push('mdc_block_close', params.name, -1)
