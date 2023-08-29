@@ -42,7 +42,6 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
     function mdc_block(state, startLine, endLine, silent) {
       let pos: number
       let nextLine: number
-      let token: Token
       let auto_closed = false
       let start = state.bMarks[startLine] + state.tShift[startLine]
       let max = state.eMarks[startLine]
@@ -132,19 +131,19 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
       // this will prevent lazy continuations from ever going past our end marker
       state.lineMax = nextLine
 
-      token = state.push('mdc_block_open', params.name, 1)
-      token.markup = markup
-      token.block = true
-      token.info = params.name
-      token.map = [startLine, nextLine]
+      const tokenOpen = state.push('mdc_block_open', params.name, 1)
+      tokenOpen.markup = markup
+      tokenOpen.block = true
+      tokenOpen.info = params.name
+      tokenOpen.map = [startLine, nextLine]
 
       // Add props
       if (params.props) {
         params.props.forEach(([key, value]) => {
           if (key === 'class')
-            token.attrJoin(key, value)
+            tokenOpen.attrJoin(key, value)
           else
-            token.attrSet(key, value)
+            tokenOpen.attrSet(key, value)
         })
       }
 
@@ -152,15 +151,25 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
       const blkIndent = state.blkIndent
       state.blkIndent = indent
       state.env.mdcBlockTokens ||= [] as Token[]
-      state.env.mdcBlockTokens.unshift(token)
+      state.env.mdcBlockTokens.unshift(tokenOpen)
       state.md.block.tokenize(state, startLine + 1, nextLine)
       state.blkIndent = blkIndent
-      state.env.mdcBlockTokens.shift(token)
+      state.env.mdcBlockTokens.shift(tokenOpen)
 
       // Ending Tag
-      token = state.push('mdc_block_close', params.name, -1)
-      token.markup = state.src.slice(start, pos)
-      token.block = true
+      const tokenClose = state.push('mdc_block_close', params.name, -1)
+      tokenClose.markup = state.src.slice(start, pos)
+      tokenClose.block = true
+
+      state.tokens.slice(
+        state.tokens.indexOf(tokenOpen) + 1,
+        state.tokens.indexOf(tokenClose),
+      )
+        .filter(i => i.level === tokenOpen.level + 1)
+        .forEach((i) => {
+          if (i.tag === 'p')
+            i.hidden = true
+        })
 
       state.parentType = old_parent
       state.lineMax = old_line_max
