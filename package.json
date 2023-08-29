@@ -50,6 +50,9 @@
     "@types/markdown-it": "^13.0.1",
     "markdown-it": "^13.0.1"
   },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^0.41.0",
     "@antfu/ni": "^0.21.6",
@@ -78,8 +81,5 @@
   },
   "lint-staged": {
     "*": "eslint --fix"
-  },
-  "dependencies": {
-    "js-yaml": "^4.1.0"
   }
 }
