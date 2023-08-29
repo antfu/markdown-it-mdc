@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { parseProps } from '../src/props'
+import { parseProps } from './props'
 
 function parse(str: string) {
   const items = parseProps(str) || []

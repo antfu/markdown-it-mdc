@@ -6,7 +6,7 @@ import MarkdownIt from 'markdown-it'
 import { format } from 'prettier'
 import MarkdownItMdc from '../src'
 
-describe('should', () => {
+describe('fixtures', () => {
   const files = import.meta.glob('./input/*.md', { as: 'raw', eager: true })
   const filter = process.env.FILTER
   Object.entries(files)

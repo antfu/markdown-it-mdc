@@ -11,9 +11,6 @@ const MarkdownItMdc: MarkdownIt.PluginWithOptions<MarkdownItMdcOptions> = (
   options = {},
 ) => {
   md.use(MarkdownItMdcBlock, <MdcBlockOptions>{
-    validate() {
-      return true
-    },
   })
 }
 

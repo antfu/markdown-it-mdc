@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { parseBlockParams } from '../src/utils'
+import { parseBlockParams } from './block-params'
 
 describe('parseBlockParams', () => {
   it('basic', () => {

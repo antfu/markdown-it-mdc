@@ -2,7 +2,7 @@ import type MarkdownIt from 'markdown-it'
 import type { RuleBlock } from 'markdown-it/lib/parser_block'
 import type Renderer from 'markdown-it/lib/renderer'
 import type Token from 'markdown-it/lib/token'
-import { parseBlockParams } from './utils'
+import { parseBlockParams } from './parse/block-params'
 
 export interface MdcBlockOptions {
   marker?: string | undefined
@@ -21,17 +21,11 @@ export interface ExtendToken extends Token {
 export function MarkdownItMdcBlock(md: MarkdownIt, options: MdcBlockOptions) {
   const name = 'mdc'
 
-  // Second param may be useful if you decide
-  // to increase minimal allowed marker length
   function validateDefault(params: string) {
     return !!params
   }
 
   function renderDefault(tokens: ExtendToken[], idx: number, _options: MarkdownIt.Options, env: any, slf: Renderer) {
-    // // add a class to the opening tag
-    // if (tokens[idx]?.mdc?.blockName)
-    //   tokens[idx].attrJoin('class', tokens[idx]!.mdc!.blockName)
-
     return slf.renderToken(tokens, idx, _options)
   }
 
