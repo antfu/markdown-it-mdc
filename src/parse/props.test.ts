@@ -1,10 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { parseProps } from './props'
+import { parseProps, searchProps } from './props'
 
 function parse(str: string) {
-  const items = parseProps(str) || []
-
-  return `\n${items.map(([key, value]) => `${key}=${value}`).join('\n')}\n`
+  const props = parseProps(str) || []
+  return `\n${props.map(([key, value]) => `${key}=${value}`).join('\n')}\n`
 }
 
 describe('parseProps', () => {

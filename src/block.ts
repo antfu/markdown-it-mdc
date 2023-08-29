@@ -5,7 +5,6 @@ import type Token from 'markdown-it/lib/token'
 import { parseBlockParams } from './parse/block-params'
 
 export interface MdcBlockOptions {
-  marker?: string | undefined
   validate?(params: string, markup: string): boolean
   render?: Renderer.RenderRule | undefined
 }
@@ -18,9 +17,7 @@ export interface ExtendToken extends Token {
   }
 }
 
-export function MarkdownItMdcBlock(md: MarkdownIt, options: MdcBlockOptions) {
-  const name = 'mdc'
-
+export const MarkdownItMdcBlock: MarkdownIt.PluginWithOptions<MdcBlockOptions> = (md, options) => {
   function validateDefault(params: string) {
     return !!params
   }
@@ -32,7 +29,7 @@ export function MarkdownItMdcBlock(md: MarkdownIt, options: MdcBlockOptions) {
   options = options || {}
 
   const min_markers = 2
-  const marker_str = options.marker || ':'
+  const marker_str = ':'
   const marker_char = marker_str.charCodeAt(0)
   const validate = options.validate || validateDefault
   const render = options.render || renderDefault
@@ -130,7 +127,7 @@ export function MarkdownItMdcBlock(md: MarkdownIt, options: MdcBlockOptions) {
     // this will prevent lazy continuations from ever going past our end marker
     state.lineMax = nextLine
 
-    token = state.push(`mdc_block_${name}_open`, params.name, 1) as ExtendToken
+    token = state.push('mdc_block_open', params.name, 1) as ExtendToken
     token.markup = markup
     token.block = true
     token.info = params.name
@@ -157,7 +154,7 @@ export function MarkdownItMdcBlock(md: MarkdownIt, options: MdcBlockOptions) {
     state.blkIndent = blkIndent
 
     // Ending Tag
-    token = state.push(`mdc_block_${name}_close`, params.name, -1)
+    token = state.push('mdc_block_close', params.name, -1)
     token.markup = state.src.slice(start, pos)
     token.block = true
 
@@ -168,9 +165,9 @@ export function MarkdownItMdcBlock(md: MarkdownIt, options: MdcBlockOptions) {
     return true
   }
 
-  md.block.ruler.before('fence', `mdc_block_${name}`, container, {
+  md.block.ruler.before('fence', 'mdc_block', container, {
     alt: ['paragraph', 'reference', 'blockquote', 'list'],
   })
-  md.renderer.rules[`mdc_block_${name}_open`] = render
-  md.renderer.rules[`mdc_block_${name}_close`] = render
+  md.renderer.rules.mdc_block_open = render
+  md.renderer.rules.mdc_block_close = render
 }
