@@ -66,5 +66,14 @@ describe('parseProps', () => {
         class=with_attribute
         "
       `)
+
+    expect(parse(`
+      {items='It\\'s me'}
+    `))
+      .toMatchInlineSnapshot(`
+        "
+        items=It\\\\'s me
+        "
+      `)
   })
 })

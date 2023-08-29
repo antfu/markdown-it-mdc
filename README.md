@@ -16,7 +16,7 @@ MDC (Markdown Components) for [`markdown-it`](https://github.com/markdown-it/mar
   - [ ] [Slots](https://remark-mdc.nuxt.space/#slots)
 - [x] [Inline Components](https://remark-mdc.nuxt.space/#inline-components)
 - [x] [Inline Props](https://remark-mdc.nuxt.space/#inline-props)
-- [ ] [Span](https://remark-mdc.nuxt.space/#span)
+- [x] [Span](https://remark-mdc.nuxt.space/#span)
 
 ## Sponsors
 

@@ -21,6 +21,8 @@ export const MarkdownItInlineComponent: MarkdownIt.PluginWithOptions<MdcInlineCo
         contentStart = index + 1
         while (index < state.src.length) {
           index += 1
+          if (state.src[index] === '\\')
+            index += 2
           if (state.src[index] === ']') {
             contentEnd = index
             index += 1

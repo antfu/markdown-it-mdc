@@ -28,7 +28,10 @@ export function searchProps(content: string, index = 0) {
   index += 1
 
   while (index < content.length) {
-    if (content[index] === '}') {
+    if (content[index] === '\\') {
+      index += 2
+    }
+    else if (content[index] === '}') {
       index += 1
       break
     }
@@ -80,7 +83,9 @@ export function searchProps(content: string, index = 0) {
   function searchUntil(str: string) {
     const start = index
     while (index < content.length) {
-      index++
+      index += 1
+      if (content[index] === '\\')
+        index += 2
       if (str.includes(content[index]))
         break
     }

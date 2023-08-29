@@ -14,8 +14,9 @@ export const MarkdownItInlineSpan: MarkdownIt.PluginWithOptions<MdcInlineSpanOpt
 
     let index = start + 1
     while (index < state.src.length) {
-      const char = state.src[index]
-      if (char === ']')
+      if (state.src[index] === '\\')
+        index += 2
+      if (state.src[index] === ']')
         break
       index += 1
     }
