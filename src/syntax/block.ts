@@ -2,7 +2,7 @@ import type MarkdownIt from 'markdown-it'
 import type { RuleBlock } from 'markdown-it/lib/parser_block'
 import type Renderer from 'markdown-it/lib/renderer'
 import type Token from 'markdown-it/lib/token'
-import { parseBlockParams } from './parse/block-params'
+import { parseBlockParams } from '../parse/block-params'
 
 export interface MdcBlockOptions {
   validate?(params: string, markup: string): boolean

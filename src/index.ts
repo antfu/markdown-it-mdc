@@ -1,7 +1,7 @@
 import type MarkdownIt from 'markdown-it'
-import { MarkdownItMdcBlock } from './block'
-import { MarkdownItInlineProps } from './inline-props'
-import { MarkdownItInlineComponent } from './inline-component'
+import { MarkdownItMdcBlock } from './syntax/block'
+import { MarkdownItInlineProps } from './syntax/inline-props'
+import { MarkdownItInlineComponent } from './syntax/inline-component'
 
 export interface MarkdownItMdcOptions {
 

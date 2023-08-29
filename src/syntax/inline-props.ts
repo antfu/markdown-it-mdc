@@ -1,12 +1,12 @@
 import type MarkdownIt from 'markdown-it'
 import Token from 'markdown-it/lib/token'
-import { searchProps } from './parse/props'
+import { searchProps } from '../parse/props'
 
 export interface MdcInlinePropsOptions {
 
 }
 
-export const MarkdownItInlineProps: MarkdownIt.PluginWithOptions<MdcInlinePropsOptions> = (md, options) => {
+export const MarkdownItInlineProps: MarkdownIt.PluginWithOptions<MdcInlinePropsOptions> = (md) => {
   md.inline.ruler.after('entity', 'mdc_inline_props', (state, silent) => {
     const start = state.pos
     const char = state.src[start]

@@ -1,8 +1,4 @@
-import { text } from 'node:stream/consumers'
 import type MarkdownIt from 'markdown-it'
-import Token from 'markdown-it/lib/token'
-import { s } from 'vitest/dist/reporters-2ff87305'
-import { searchProps } from './parse/props'
 
 export interface MdcInlineComponentOptions {
 
@@ -37,6 +33,12 @@ export const MarkdownItInlineComponent: MarkdownIt.PluginWithOptions<MdcInlineCo
         break
       index += 1
     }
+
+    if (index === start)
+      return false
+
+    if (silent)
+      return true
 
     if (contentEnd !== contentStart) {
       const name = state.src.slice(start + 1, contentStart - 1)
