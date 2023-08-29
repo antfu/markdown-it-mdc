@@ -4,7 +4,8 @@ import { parseBlockParams } from '../parse/block-params'
 
 export const MarkdownItMdcBlockContent: MarkdownIt.PluginSimple = (md) => {
   md.block.ruler.after('code', 'mdc_block_yaml',
-    (state, startLine, endLine, silent) => {
+    // eslint-disable-next-line prefer-arrow-callback
+    function mdc_block_yaml(state, startLine, endLine, silent) {
       if (!state.env.mdcBlockTokens?.length)
         return false
 
@@ -48,7 +49,8 @@ export const MarkdownItMdcBlockContent: MarkdownIt.PluginSimple = (md) => {
     })
 
   md.block.ruler.after('code', 'mdc_block_slots',
-    (state, startLine, endLine, silent) => {
+    // eslint-disable-next-line prefer-arrow-callback
+    function mdc_block(state, startLine, endLine, silent) {
       if (!state.env.mdcBlockTokens?.length)
         return false
 

@@ -8,7 +8,8 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
   const marker_char = marker_str.charCodeAt(0)
 
   md.block.ruler.before('fence', 'mdc_block_shorthand',
-    (state, startLine, endLine, silent) => {
+    // eslint-disable-next-line prefer-arrow-callback
+    function mdc_block_shorthand(state, startLine, endLine, silent) {
       const line = state.src.slice(state.bMarks[startLine] + state.tShift[startLine], state.eMarks[startLine])
 
       if (!line.match(/^:[\w]/))
@@ -37,7 +38,8 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
   )
 
   md.block.ruler.before('fence', 'mdc_block',
-    (state, startLine, endLine, silent) => {
+    // eslint-disable-next-line prefer-arrow-callback
+    function mdc_block(state, startLine, endLine, silent) {
       let pos: number
       let nextLine: number
       let token: Token

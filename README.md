@@ -14,6 +14,7 @@
   - [x] [Nesting](https://remark-mdc.nuxt.space/#nesting)
   - [x] [YAML Props](https://remark-mdc.nuxt.space/#yaml-props)
   - [x] [Slots](https://remark-mdc.nuxt.space/#slots)
+  - [ ] Unwrap `<p>` tag in blocks
 - [x] [Inline Components](https://remark-mdc.nuxt.space/#inline-components)
 - [x] [Inline Props](https://remark-mdc.nuxt.space/#inline-props)
 - [x] [Span](https://remark-mdc.nuxt.space/#span)
