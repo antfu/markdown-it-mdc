@@ -9,7 +9,8 @@ export const MarkdownItInlineComponent: MarkdownIt.PluginWithOptions<MdcInlineCo
     const start = state.pos
     const char = state.src[start]
 
-    if (char !== ':')
+    // Requires a space before the colon
+    if (!(char === ':' && state.src[start - 1] === ' '))
       return false
 
     let index = start + 1
@@ -36,7 +37,8 @@ export const MarkdownItInlineComponent: MarkdownIt.PluginWithOptions<MdcInlineCo
       index += 1
     }
 
-    if (index === start)
+    // Empty name
+    if (index <= start + 1)
       return false
 
     if (silent)
