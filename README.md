@@ -6,14 +6,14 @@
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
 
-MDC (Markdown Components) for [`markdown-it`](https://github.com/markdown-it/markdown-it). Trying to align with [`remark-mdc`](https://remark-mdc.nuxt.space/)
+[MDC (Markdown Components)](https://remark-mdc.nuxt.space/) for [`markdown-it`](https://github.com/markdown-it/markdown-it).
 
 ## Progress
 
 - [x] Block Component
   - [x] [Nesting](https://remark-mdc.nuxt.space/#nesting)
   - [ ] [YAML Props](https://remark-mdc.nuxt.space/#yaml-props)
-  - [ ] [Slots](https://remark-mdc.nuxt.space/#slots)
+  - [x] [Slots](https://remark-mdc.nuxt.space/#slots)
 - [x] [Inline Components](https://remark-mdc.nuxt.space/#inline-components)
 - [x] [Inline Props](https://remark-mdc.nuxt.space/#inline-props)
 - [x] [Span](https://remark-mdc.nuxt.space/#span)
