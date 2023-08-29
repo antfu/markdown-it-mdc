@@ -4,6 +4,11 @@ import process from 'node:process'
 import { describe, expect, it } from 'vitest'
 import MarkdownIt from 'markdown-it'
 import { format } from 'prettier'
+import { componentPlugin } from '@mdit-vue/plugin-component'
+import { frontmatterPlugin } from '@mdit-vue/plugin-frontmatter'
+
+// @ts-expect-error missing type
+import MarkdownItCheckbox from 'markdown-it-task-checkbox'
 import MarkdownItMdc from '../src'
 
 describe('fixtures', () => {
@@ -21,7 +26,11 @@ describe('fixtures', () => {
           linkify: true,
           xhtmlOut: true,
         })
-        md.use(MarkdownItMdc)
+
+        md.use(MarkdownItCheckbox)
+          .use(MarkdownItMdc)
+          .use(componentPlugin)
+          .use(frontmatterPlugin)
 
         const rendered = md.render(content)
         const formatted = await format(rendered, {

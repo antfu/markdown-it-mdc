@@ -21,8 +21,29 @@ import mdc from 'markdown-it-mdc'
 const md = new MarkdownIt()
   .use(mdc)
 </code></pre>
-<Counter :count="1" />
-<CustomComponent> Nested <Counter @click="foo" /> </CustomComponent>
+<ul class="task-list">
+  <li class="task-list-item">
+    <input type="checkbox" id="cbx_0" checked="true" disabled="true" /><label
+      for="cbx_0"
+      ><span>x</span> List A</label
+    >
+  </li>
+  <li class="task-list-item">
+    <input type="checkbox" id="cbx_1" disabled="true" /><label for="cbx_1"
+      ><span> </span> List B</label
+    >
+    <ul class="task-list">
+      <li class="task-list-item">
+        <input type="checkbox" id="cbx_2" disabled="true" /><label for="cbx_2"
+          ><span> </span> List B.1</label
+        >
+      </li>
+    </ul>
+  </li>
+</ul>
+<Counter :count="1" /><CustomComponent>
+  Nested <Counter @click="foo" />
+</CustomComponent>
 <style scoped>
   .mdc-button {
     background-color: #ff0000;
