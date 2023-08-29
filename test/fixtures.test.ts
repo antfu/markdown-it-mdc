@@ -28,7 +28,7 @@ describe('fixtures', () => {
           parser: 'html',
         })
 
-        expect(formatted)
+        expect(formatted.trim())
           .toMatchFileSnapshot(path.replace('input', 'output').replace('.md', '.html'))
       })
     })
