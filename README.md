@@ -6,7 +6,9 @@
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
 
-[MDC (Markdown Components)](https://remark-mdc.nuxt.space/) for [`markdown-it`](https://github.com/markdown-it/markdown-it).
+[MDC (Markdown Components)](https://content.nuxtjs.org/guide/writing/mdc) for [`markdown-it`](https://github.com/markdown-it/markdown-it).
+
+Use [VS Code MDC [Extension](https://marketplace.visualstudio.com/items?itemName=Nuxt.mdc) for IDE support.
 
 ## Usage
 
@@ -28,17 +30,17 @@ Hello **World** with :my-component{.text-red name="foo"}!
 `)
 ```
 
-## Progress
+## Features
 
-This plugin implements all the syntaxes documented in [remark-mdc](https://remark-mdc.nuxt.space/). We are still testing behavior compatibility in detail before reaching `v0.1.0`.
+This plugin implements all the syntaxes documented in [MDC Syntax](https://content.nuxtjs.org/guide/writing/mdc). We are still testing behavior compatibility in detail before reaching `v0.1.0`.
 
-- [x] [Block Component](https://remark-mdc.nuxt.space/#block-components)
-  - [x] [Nesting](https://remark-mdc.nuxt.space/#nesting)
-  - [x] [YAML Props](https://remark-mdc.nuxt.space/#yaml-props)
-  - [x] [Slots](https://remark-mdc.nuxt.space/#slots)
-- [x] [Inline Components](https://remark-mdc.nuxt.space/#inline-components)
-- [x] [Inline Props](https://remark-mdc.nuxt.space/#inline-props)
-- [x] [Span](https://remark-mdc.nuxt.space/#span)
+- [x] [Block Component](https://content.nuxtjs.org/guide/writing/mdc#block-components)
+  - [x] [Nesting](https://content.nuxtjs.org/guide/writing/mdc#nesting)
+  - [x] [YAML Props](https://content.nuxtjs.org/guide/writing/mdc#yaml-props)
+  - [x] [Slots](https://content.nuxtjs.org/guide/writing/mdc#slots)
+- [x] [Inline Components](https://content.nuxtjs.org/guide/writing/mdc#inline-components)
+- [x] [Inline Props](https://content.nuxtjs.org/guide/writing/mdc#props)
+- [x] [Span](https://content.nuxtjs.org/guide/writing/mdc#span-text)
 - ~~Frontmatter~~. Frontmatter is not built-in in this plugin, we recommend using [`@mdit-vue/plugin-frontmatter`](https://github.com/mdit-vue/mdit-vue/tree/main/packages/plugin-frontmatter) instead.
 
 ## Sponsors
