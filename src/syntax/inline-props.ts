@@ -44,6 +44,38 @@ export const MarkdownItInlineProps: MarkdownIt.PluginWithOptions<MdcInlinePropsO
     return ''
   }
 
+  // Apply the props to the parent token
+  // when it's the only child of the inline token inside a paragraph or heading
+  // e.g. `# Heading {class="foo"}`, it will apply the class to the `h1` tag instead of creating a `span` tag
+  const _parse = md.parse
+  md.parse = function (src, env) {
+    const tokens = _parse.call(this, src, env)
+
+    tokens.forEach((token, index) => {
+      const prev = tokens[index - 1]
+      if (prev?.type !== 'heading_open' && prev?.type !== 'paragraph_open')
+        return
+
+      if (
+        token.type === 'inline'
+        && token.children?.length === 2
+        && token.children[0].type === 'text'
+        && token.children[1].type === 'mdc_inline_props'
+      ) {
+        const props = token.children[1].attrs
+        token.children.splice(1, 1)
+        props?.forEach(([key, value]) => {
+          if (key === 'class')
+            prev.attrJoin('class', value)
+          else
+            prev.attrSet(key, value)
+        })
+      }
+    })
+
+    return tokens
+  }
+
   // Replace the inline renderer to apply the props to the previous token
   const _renderInline = md.renderer.renderInline
   md.renderer.renderInline = function (tokens: Token[], options, env) {
