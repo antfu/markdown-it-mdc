@@ -2,8 +2,13 @@ import type MarkdownIt from 'markdown-it'
 import type Token from 'markdown-it/lib/token'
 import YAML from 'js-yaml'
 import { parseBlockParams } from '../parse/block-params'
+import type { MarkdownItMdcOptions } from '..'
 
-export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
+export const MarkdownItMdcBlock: MarkdownIt.PluginWithOptions<MarkdownItMdcOptions> = (md, options = {}) => {
+  const {
+    stripParagraphs = false,
+  } = options || {}
+
   const min_markers = 2
   const marker_str = ':'
   const marker_char = marker_str.charCodeAt(0)
@@ -167,10 +172,13 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
         state.tokens.indexOf(tokenClose),
       )
         .filter(i => i.level === tokenOpen.level + 1)
-        .forEach((i) => {
+
+      if (stripParagraphs) {
+        state.tokens.forEach((i) => {
           if (i.tag === 'p')
             i.hidden = true
         })
+      }
 
       state.parentType = old_parent
       state.lineMax = old_line_max

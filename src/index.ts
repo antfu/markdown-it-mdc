@@ -38,6 +38,12 @@ export interface MarkdownItMdcOptions {
      **/
     inlineComponent?: boolean
   }
+  /**
+   * Strip paragraphs from block components
+   *
+   * @default true
+   */
+  stripParagraphs?: boolean
 }
 
 const MarkdownItMdc: MarkdownIt.PluginWithOptions<MarkdownItMdcOptions> = (md, options = {}) => {
@@ -49,7 +55,7 @@ const MarkdownItMdc: MarkdownIt.PluginWithOptions<MarkdownItMdcOptions> = (md, o
   } = options.syntax || {}
 
   if (blockComponent)
-    md.use(MarkdownItMdcBlock)
+    md.use(MarkdownItMdcBlock, options)
 
   if (inlineProps)
     md.use(MarkdownItInlineProps)
