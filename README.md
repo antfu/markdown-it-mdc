@@ -8,7 +8,7 @@
 
 [MDC (Markdown Components)](https://content.nuxtjs.org/guide/writing/mdc) for [`markdown-it`](https://github.com/markdown-it/markdown-it).
 
-Use [VS Code MDC [Extension](https://marketplace.visualstudio.com/items?itemName=Nuxt.mdc) for IDE support.
+Use [VS Code MDC Extension](https://marketplace.visualstudio.com/items?itemName=Nuxt.mdc) for IDE support.
 
 ## Usage
 
