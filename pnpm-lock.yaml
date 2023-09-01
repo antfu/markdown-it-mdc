@@ -19,8 +19,8 @@ importers:
         specifier: ^0.41.0
         version: 0.41.0(eslint@8.48.0)(typescript@5.2.2)
       '@antfu/ni':
-        specifier: ^0.21.6
-        version: 0.21.6
+        specifier: ^0.21.8
+        version: 0.21.8
       '@antfu/utils':
         specifier: ^0.7.6
         version: 0.7.6
@@ -64,11 +64,11 @@ importers:
         specifier: ^1.0.6
         version: 1.0.6
       pnpm:
-        specifier: ^8.7.0
-        version: 8.7.0
+        specifier: ^8.7.1
+        version: 8.7.1
       prettier:
-        specifier: ^3.0.2
-        version: 3.0.2
+        specifier: ^3.0.3
+        version: 3.0.3
       rimraf:
         specifier: ^5.0.1
         version: 5.0.1
@@ -199,8 +199,8 @@ packages:
       - typescript
     dev: true
 
-  /@antfu/ni@0.21.6:
-    resolution: {integrity: sha512-Hj0BKIOspbo+OsPT5mjONeqpuVb4bxp9jdJ4p/b5GxgYNIqJjBcJdp0DEON7CJflKoWuHf7I52wO5kOJJ4DveQ==}
+  /@antfu/ni@0.21.8:
+    resolution: {integrity: sha512-90X8pU2szlvw0AJo9EZMbYc2eQKkmO7mAdC4tD4r5co2Mm56MT37MIG8EyB7p4WRheuzGxuLDxJ63mF6+Zajiw==}
     hasBin: true
     dev: true
 
@@ -1366,7 +1366,7 @@ packages:
     resolution: {integrity: sha512-mFMBfMOz8QxhYVbuINtswBp9VL2b4Y0QqYHwqLz3YbgtfAcat2Dl6Y1o4e22S/OVE6Ebl9m7wWiMT2lSbAs1wA==}
     deprecated: This is a stub types definition. prettier provides its own type definitions, so you do not need this installed.
     dependencies:
-      prettier: 3.0.2
+      prettier: 3.0.3
     dev: true
 
   /@types/resolve@1.20.2:
@@ -3731,8 +3731,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /pnpm@8.7.0:
-    resolution: {integrity: sha512-HWH4wQ6KWl2/vd6g8fXvt9vVF3IjBzrslTzyMKpGQWiEuUJ6ZCHbp48orQ+T++3ji6VwgyN7NQJD3mseOoznHQ==}
+  /pnpm@8.7.1:
+    resolution: {integrity: sha512-Qbt3EhYUaXFS2k4FLQA7r2/eYz/JoDeG680/3UXG0Ga03LPuY4GgdvCLe+zO3M7ZnWG4VI4bAwk7QpJyfr5eqA==}
     engines: {node: '>=16.14'}
     hasBin: true
     dev: true
@@ -3759,8 +3759,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier@3.0.2:
-    resolution: {integrity: sha512-o2YR9qtniXvwEZlOKbveKfDQVyqxbEIWn48Z8m3ZJjBjcCmUy3xZGIv+7AkaeuaTr6yPXJjwv07ZWlsWbEy1rQ==}
+  /prettier@3.0.3:
+    resolution: {integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
