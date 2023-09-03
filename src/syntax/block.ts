@@ -140,7 +140,7 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
 
       // Add props
       if (params.props) {
-        params.props.forEach(([key, value]) => {
+        params.props?.forEach(([key, value]) => {
           if (key === 'class')
             tokenOpen.attrJoin(key, value)
           else
