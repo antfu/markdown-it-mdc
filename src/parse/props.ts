@@ -67,7 +67,7 @@ export function searchProps(content: string, index = 0) {
       }
       const char = content[index]
       if (start !== index) {
-        const key = content.slice(start, index)
+        const key = content.slice(start, index).trim()
         if (char === '=') {
           index += 1
           props.push([

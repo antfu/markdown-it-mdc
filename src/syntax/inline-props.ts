@@ -14,8 +14,8 @@ export const MarkdownItInlineProps: MarkdownIt.PluginWithOptions<MdcInlinePropsO
     if (char !== '{')
       return false
 
-    // Vue's mustache {{ }} syntax
-    if (state.src[start + 1] === '{' || state.src[start - 1] === '{')
+    // Vue's mustache {{ }} syntax and string template ${ } syntax
+    if (state.src[start + 1] === '{' || state.src[start - 1] === '{' || state.src[start - 1] === '$')
       return false
 
     const search = searchProps(state.src, start)
