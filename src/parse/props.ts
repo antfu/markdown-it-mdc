@@ -27,6 +27,14 @@ export function searchProps(content: string, index = 0) {
 
   index += 1
 
+  // Vue's mustache {{ }} syntax
+  if (content[index] === '{') {
+    return {
+      props,
+      index,
+    }
+  }
+
   while (index < content.length) {
     if (content[index] === '\\') {
       index += 2
