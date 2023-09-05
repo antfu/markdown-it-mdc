@@ -13,10 +13,12 @@ export function parseProps(content: string) {
   content = content.trim()
   if (!content)
     return undefined
-  const { props, index } = searchProps(content)
-  if (index !== content.length)
-    throw new Error(`Invalid props: \`${content}\`, expected end \`}\` but got \`${content.slice(index)}\``)
-  return props
+  const props = searchProps(content)
+  if (!props)
+    throw new Error(`Invalid props: \`${content}\``)
+  if (props.index !== content.length)
+    throw new Error(`Invalid props: \`${content}\`, expected end \`}\` but got \`${content.slice(props.index)}\``)
+  return props.props
 }
 
 export function searchProps(content: string, index = 0) {
@@ -24,6 +26,10 @@ export function searchProps(content: string, index = 0) {
     throw new Error(`Invalid props, expected \`{\` but got '${content[index]}'`)
 
   const props: [string, string][] = []
+
+  // Vue's mustache {{ }} syntax
+  if (content[index + 1] === '{')
+    return undefined
 
   index += 1
 
@@ -61,7 +67,7 @@ export function searchProps(content: string, index = 0) {
       }
       const char = content[index]
       if (start !== index) {
-        const key = content.slice(start, index)
+        const key = content.slice(start, index).trim()
         if (char === '=') {
           index += 1
           props.push([

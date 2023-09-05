@@ -145,7 +145,7 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginWithOptions<MarkdownItMdcOptio
 
       // Add props
       if (params.props) {
-        params.props.forEach(([key, value]) => {
+        params.props?.forEach(([key, value]) => {
           if (key === 'class')
             tokenOpen.attrJoin(key, value)
           else
