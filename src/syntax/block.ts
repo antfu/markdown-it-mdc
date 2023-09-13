@@ -172,13 +172,10 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginWithOptions<MarkdownItMdcOptio
         state.tokens.indexOf(tokenClose),
       )
         .filter(i => i.level === tokenOpen.level + 1)
-
-      if (stripParagraphs) {
-        state.tokens.forEach((i) => {
+        .forEach((i) => {
           if (i.tag === 'p')
-            i.hidden = true
+            i.hidden = stripParagraphs
         })
-      }
 
       state.parentType = old_parent
       state.lineMax = old_line_max
