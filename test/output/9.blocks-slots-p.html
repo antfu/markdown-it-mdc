@@ -1,0 +1,18 @@
+<h1>Hello</h1>
+<hero>
+  <p>Default slot text</p>
+  <template #description="">
+    <p>This will be rendered inside the <code>description</code> slot.</p>
+  </template>
+  <template #foo="" key="value">
+    <h1>Title</h1>
+    <p>This will be rendered inside the <code>foo</code> slot.</p>
+  </template>
+</hero>
+<foo>
+  <template #bar="">
+    <baz>
+      <p>Baz <inline-component /></p>
+    </baz>
+  </template>
+</foo>
