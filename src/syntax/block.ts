@@ -6,7 +6,7 @@ import type { MarkdownItMdcOptions } from '..'
 
 export const MarkdownItMdcBlock: MarkdownIt.PluginWithOptions<MarkdownItMdcOptions> = (md, options = {}) => {
   const {
-    stripParagraphs = false,
+    stripParagraphs = true,
   } = options || {}
 
   const min_markers = 2
