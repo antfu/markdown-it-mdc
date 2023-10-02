@@ -168,7 +168,7 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
       )
         .filter(i => i.level === tokenOpen.level + 1)
         .forEach((i, _, arr) => {
-          if (arr.length === 1 && i.tag === 'p')
+          if (arr.length <= 2 && i.tag === 'p')
             i.hidden = true
         })
 
