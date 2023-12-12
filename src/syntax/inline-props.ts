@@ -1,5 +1,5 @@
 import type MarkdownIt from 'markdown-it'
-import Token from 'markdown-it/lib/token.js'
+import Token from 'markdown-it/lib/token'
 import { searchProps } from '../parse/props'
 
 export interface MdcInlinePropsOptions {

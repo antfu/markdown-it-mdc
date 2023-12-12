@@ -46,14 +46,14 @@ describe('parseProps', () => {
     expect(parse('{:items=\'["Nuxt", "Vue", "React"]\'}'))
       .toMatchInlineSnapshot(`
         "
-        :items=[\\"Nuxt\\", \\"Vue\\", \\"React\\"]
+        :items=["Nuxt", "Vue", "React"]
         "
       `)
 
     expect(parse('{:options=\'{"responsive": true, "scales": {"y": {"beginAtZero": true}}}\'}'))
       .toMatchInlineSnapshot(`
         "
-        :options={\\"responsive\\": true, \\"scales\\": {\\"y\\": {\\"beginAtZero\\": true}}}
+        :options={"responsive": true, "scales": {"y": {"beginAtZero": true}}}
         "
       `)
 
@@ -72,7 +72,7 @@ describe('parseProps', () => {
     `))
       .toMatchInlineSnapshot(`
         "
-        items=It\\\\'s me
+        items=It\\'s me
         "
       `)
   })

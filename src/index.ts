@@ -35,7 +35,7 @@ export interface MarkdownItMdcOptions {
      *
      * @see https://content.nuxtjs.org/guide/writing/mdc#inline-component
      * @default true
-     **/
+     */
     inlineComponent?: boolean
   }
 }

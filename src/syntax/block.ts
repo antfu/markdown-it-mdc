@@ -8,7 +8,9 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
   const marker_str = ':'
   const marker_char = marker_str.charCodeAt(0)
 
-  md.block.ruler.before('fence', 'mdc_block_shorthand',
+  md.block.ruler.before(
+    'fence',
+    'mdc_block_shorthand',
     // eslint-disable-next-line prefer-arrow-callback
     function mdc_block_shorthand(state, startLine, endLine, silent) {
       const line = state.src.slice(state.bMarks[startLine] + state.tShift[startLine], state.eMarks[startLine])
@@ -38,7 +40,9 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
     },
   )
 
-  md.block.ruler.before('fence', 'mdc_block',
+  md.block.ruler.before(
+    'fence',
+    'mdc_block',
     // eslint-disable-next-line prefer-arrow-callback
     function mdc_block(state, startLine, endLine, silent) {
       let pos: number
@@ -183,8 +187,10 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
     },
   )
 
-  md.block.ruler.after('code', 'mdc_block_yaml',
-  // eslint-disable-next-line prefer-arrow-callback
+  md.block.ruler.after(
+    'code',
+    'mdc_block_yaml',
+    // eslint-disable-next-line prefer-arrow-callback
     function mdc_block_yaml(state, startLine, endLine, silent) {
       if (!state.env.mdcBlockTokens?.length)
         return false
@@ -226,10 +232,13 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
       state.line = lineEnd + 1
       state.lineMax = lineEnd + 1
       return true
-    })
+    },
+  )
 
-  md.block.ruler.after('code', 'mdc_block_slots',
-  // eslint-disable-next-line prefer-arrow-callback
+  md.block.ruler.after(
+    'code',
+    'mdc_block_slots',
+    // eslint-disable-next-line prefer-arrow-callback
     function mdc_block(state, startLine, endLine, silent) {
       if (!state.env.mdcBlockTokens?.length)
         return false
