@@ -1,6 +1,11 @@
 import type MarkdownIt from 'markdown-it'
-import Token from 'markdown-it/lib/token'
+
+// @ts-expect-error missing type
+import _Token from 'markdown-it/lib/token.mjs'
+
 import { searchProps } from '../parse/props'
+
+const Token = _Token as MarkdownIt.Token
 
 export interface MdcInlinePropsOptions {
 
