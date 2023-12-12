@@ -1,11 +1,10 @@
+import type { Token } from 'markdown-it'
 import type MarkdownIt from 'markdown-it'
 
 // @ts-expect-error missing type
-import _Token from 'markdown-it/lib/token.mjs'
+import TokenClass from 'markdown-it/lib/token.mjs'
 
 import { searchProps } from '../parse/props'
-
-const Token = _Token as MarkdownIt.Token
 
 export interface MdcInlinePropsOptions {
 
@@ -148,9 +147,9 @@ export const MarkdownItInlineProps: MarkdownIt.PluginWithOptions<MdcInlinePropsO
 
         // If the previous token is a text token, we need to wrap it in a span
         if (!prev.tag && prev.type === 'text') {
-          prev = new Token('mdc_inline_span', 'span', 1)
+          prev = new TokenClass('mdc_inline_span', 'span', 1)
           tokens.splice(index - 1, 0, prev)
-          const close = new Token('mdc_inline_span', 'span', -1)
+          const close = new TokenClass('mdc_inline_span', 'span', -1)
           tokens.splice(index + 2, 0, close)
         }
         // If the previous token is a closing tag, we need to find the matching opening tag
