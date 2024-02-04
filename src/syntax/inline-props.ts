@@ -98,7 +98,7 @@ export const MarkdownItInlineProps: MarkdownIt.PluginWithOptions<MdcInlinePropsO
         return
 
       const prev = tokens[index - 1]
-      if (prev.type !== 'mdc_block_open' || prev.tag !== 'ul')
+      if (!prev || prev.type !== 'mdc_block_open' || prev.tag !== 'ul')
         return
 
       // find the matching close token
