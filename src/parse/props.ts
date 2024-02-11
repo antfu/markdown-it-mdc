@@ -82,7 +82,6 @@ export function searchProps(content: string, index = 0) {
           ])
         }
       }
-      index += 1
     }
   }
 
