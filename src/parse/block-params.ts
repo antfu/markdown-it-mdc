@@ -1,6 +1,6 @@
 import { parseProps } from './props'
 
-const RE_BLOCK_NAME = /^[a-z$][$_-]+/i
+const RE_BLOCK_NAME = /^[a-z$][$\w.-]*/
 
 /**
  * Parse `component-name {.params}` from block params.

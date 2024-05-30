@@ -1,5 +1,5 @@
 import type MarkdownIt from 'markdown-it'
-import type Token from 'markdown-it/lib/token'
+import type Token from 'markdown-it/lib/token.mjs'
 import YAML from 'js-yaml'
 import { parseBlockParams } from '../parse/block-params'
 

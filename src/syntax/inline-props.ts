@@ -1,7 +1,5 @@
 import type { Token } from 'markdown-it'
 import type MarkdownIt from 'markdown-it'
-
-// @ts-expect-error missing type
 import TokenClass from 'markdown-it/lib/token.mjs'
 
 import { searchProps } from '../parse/props'
