@@ -1,7 +1,7 @@
 {
   "name": "markdown-it-mdc",
   "type": "module",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "packageManager": "pnpm@9.1.3",
   "description": "Markdown Components (MDC) support for markdown-it",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
