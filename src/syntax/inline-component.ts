@@ -32,7 +32,7 @@ export const MarkdownItInlineComponent: MarkdownIt.PluginWithOptions<MdcInlineCo
         }
         break
       }
-      if (!/[\w\$_-]/.test(char))
+      if (!/[\w$\-]/.test(char))
         break
       index += 1
     }

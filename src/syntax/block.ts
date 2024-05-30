@@ -15,7 +15,7 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
     function mdc_block_shorthand(state, startLine, endLine, silent) {
       const line = state.src.slice(state.bMarks[startLine] + state.tShift[startLine], state.eMarks[startLine])
 
-      if (!line.match(/^:[\w]/))
+      if (!line.match(/^:\w/))
         return false
 
       const {
