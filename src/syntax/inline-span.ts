@@ -27,21 +27,14 @@ export const MarkdownItInlineSpan: MarkdownIt.PluginWithOptions<MdcInlineSpanOpt
     if (silent)
       return true
 
-    state.posMax = start + 1
     state.push('mdc_inline_span', 'span', 1)
 
-    state.pos = start + 1
-    state.posMax = index
     const text = state.push('text', '', 0)
     text.content = state.src.slice(start + 1, index)
-
-    state.pos = index
-    state.posMax = index + 1
 
     state.push('mdc_inline_span', 'span', -1)
 
     state.pos = index + 1
-    state.posMax = index + 1
 
     return true
   })

@@ -37,16 +37,12 @@ export const MarkdownItInlineProps: MarkdownIt.PluginWithOptions<MdcInlinePropsO
     if (silent)
       return true
 
-    state.pos = start
-    state.posMax = end
-
     // We insert a hidden token holding the props, and later apply them to the previous token
     const token = state.push('mdc_inline_props', 'span', 0)
     token.attrs = props
     token.hidden = true
 
     state.pos = end
-    state.posMax = end
 
     return true
   })

@@ -47,24 +47,17 @@ export const MarkdownItInlineComponent: MarkdownIt.PluginWithOptions<MdcInlineCo
     if (contentEnd !== contentStart) {
       const name = state.src.slice(start + 1, contentStart - 1)
       const body = state.src.slice(contentStart, contentEnd)
-      state.posMax = contentStart
       state.push('mdc_inline_component', name, 1)
-      state.pos = contentStart
-      state.posMax = contentEnd
       const text = state.push('text', '', 0)
       text.content = body
-      state.pos = contentEnd
-      state.posMax = contentEnd
       state.push('mdc_inline_component', name, -1)
     }
     else {
-      state.posMax = index
       const name = state.src.slice(start + 1, index)
       state.push('mdc_inline_component', name, 0)
     }
 
     state.pos = index
-    state.posMax = index
 
     return true
   })
