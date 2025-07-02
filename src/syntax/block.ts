@@ -1,6 +1,6 @@
 import type MarkdownIt from 'markdown-it'
 import type Token from 'markdown-it/lib/token.mjs'
-import YAML from 'js-yaml'
+import { parse } from 'yaml'
 import { parseBlockParams } from '../parse/block-params'
 
 export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
@@ -219,7 +219,7 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
       if (!silent) {
         const yaml = state.src.slice(state.bMarks[startLine + 1], state.eMarks[lineEnd - 1])
 
-        const data = YAML.load(yaml) as Record<string, unknown>
+        const data = parse(yaml) as Record<string, unknown>
         const token = state.env.mdcBlockTokens[0]
         Object.entries(data).forEach(([key, value]) => {
           if (key === 'class')

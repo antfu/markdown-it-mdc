@@ -53,7 +53,7 @@
     "markdown-it": "^14.0.0"
   },
   "dependencies": {
-    "js-yaml": "^4.1.0"
+    "yaml": "^2.8.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.16.2",
@@ -61,7 +61,6 @@
     "@antfu/utils": "^9.2.0",
     "@mdit-vue/plugin-component": "^2.1.4",
     "@mdit-vue/plugin-frontmatter": "^2.1.4",
-    "@types/js-yaml": "^4.0.9",
     "@types/markdown-it-container": "^2.0.10",
     "@types/node": "^24.0.10",
     "bumpp": "^10.2.0",
