@@ -1,18 +1,18 @@
 /// <reference types="vite/client" />
 
 import process from 'node:process'
-import { describe, expect, it } from 'vitest'
-import MarkdownIt from 'markdown-it'
-import { format } from 'prettier'
 import { componentPlugin } from '@mdit-vue/plugin-component'
 import { frontmatterPlugin } from '@mdit-vue/plugin-frontmatter'
-
+import MarkdownIt from 'markdown-it'
 // @ts-expect-error missing type
 import MarkdownItCheckbox from 'markdown-it-task-checkbox'
+import { format } from 'prettier'
+import { describe, expect, it } from 'vitest'
+
 import MarkdownItMdc from '../src'
 
 describe('fixtures', () => {
-  const files = import.meta.glob('./input/*.md', { as: 'raw', eager: true })
+  const files = import.meta.glob<string>('./input/*.md', { query: '?raw', eager: true, import: 'default' })
   const filter = process.env.FILTER
   Object.entries(files)
     .forEach(([path, content]) => {
@@ -37,7 +37,7 @@ describe('fixtures', () => {
           parser: 'html',
         })
 
-        expect(formatted.trim())
+        await expect(formatted.trim())
           .toMatchFileSnapshot(path.replace('input', 'output').replace('.md', '.html'))
       })
     })
