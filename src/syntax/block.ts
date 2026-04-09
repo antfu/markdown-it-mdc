@@ -47,10 +47,8 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
 
           // Create inline container for the content
           const inline = state.push('inline', '', 0)
-          inline.content = ''
-          const text = new state.Token('text', '', 0)
-          text.content = content
-          inline.children = [text]
+          inline.content = content
+          inline.children = []
 
           const tokenClose = state.push('mdc_block_shorthand', name, -1)
           tokenClose.map = [startLine, startLine + 1]

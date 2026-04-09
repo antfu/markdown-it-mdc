@@ -23,7 +23,8 @@ export const MarkdownItInlineComponent: MarkdownIt.PluginWithOptions<MdcInlineCo
 
     let index = start + 1
     let nameEnd = -1
-    let content: string | undefined
+    let contentStart = -1
+    let contentEnd = -1
 
     // Parse component name
     while (index < state.src.length) {
@@ -32,7 +33,8 @@ export const MarkdownItInlineComponent: MarkdownIt.PluginWithOptions<MdcInlineCo
         nameEnd = index
         const result = parseBracketContent(state.src, index)
         if (result) {
-          content = result.content
+          contentStart = index + 1
+          contentEnd = result.endIndex - 1
           index = result.endIndex
         }
         break
@@ -57,10 +59,18 @@ export const MarkdownItInlineComponent: MarkdownIt.PluginWithOptions<MdcInlineCo
 
     const name = state.src.slice(start + 1, nameEnd)
 
-    if (content !== undefined) {
+    if (contentStart !== -1) {
       state.push('mdc_inline_component', name, 1)
-      const text = state.push('text', '', 0)
-      text.content = content
+
+      // Parse the content between brackets as inline markdown
+      const oldPos = state.pos
+      const oldPosMax = state.posMax
+      state.pos = contentStart
+      state.posMax = contentEnd
+      state.md.inline.tokenize(state)
+      state.pos = oldPos
+      state.posMax = oldPosMax
+
       state.push('mdc_inline_component', name, -1)
     }
     else {
