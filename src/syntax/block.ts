@@ -233,6 +233,16 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
         })
       }
 
+      // Add bracket content as first paragraph `::bloc[Content]\n::`
+      if (params.content !== undefined) {
+        const pOpen = state.push('paragraph_open', 'p', 1)
+        pOpen.map = [startLine, startLine + 1]
+        const inline = state.push('inline', '', 0)
+        inline.content = params.content
+        inline.children = []
+        state.push('paragraph_close', 'p', -1)
+      }
+
       // Parse content
       const blkIndent = state.blkIndent
       state.blkIndent = indent
