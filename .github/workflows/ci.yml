@@ -87,4 +87,5 @@ jobs:
         run: nr test
 
       - name: Publish
+        if: runner.os == 'Linux'
         run: pnpx pkg-pr-new publish --compact --no-template --pnpm
