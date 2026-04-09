@@ -85,3 +85,6 @@ jobs:
 
       - name: Test
         run: nr test
+
+      - name: Publish
+        run: pnpx pkg-pr-new publish --compact --no-template --pnpm
