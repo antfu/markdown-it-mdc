@@ -290,7 +290,8 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
       const start = state.bMarks[startLine] + state.tShift[startLine]
       const end = state.eMarks[startLine]
 
-      if (state.src.slice(start, end) !== '---')
+      const line = state.src.slice(start, end)
+      if (line !== '---' && line !== '```yaml [props]')
         return false
 
       let lineEnd = startLine + 1
@@ -298,7 +299,7 @@ export const MarkdownItMdcBlock: MarkdownIt.PluginSimple = (md) => {
       let found = false
       while (lineEnd < endLine) {
         const line = state.src.slice(state.bMarks[lineEnd] + state.tShift[startLine], state.eMarks[lineEnd])
-        if (line === '---') {
+        if (line === '---' || line === '```') {
           found = true
           break
         }

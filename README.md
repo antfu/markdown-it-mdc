@@ -36,9 +36,9 @@ This plugin implements all the syntaxes documented in [Comark Syntax](https://co
 
 - [x] [Block Component](https://comark.dev/syntax/markdown#block-components)
   - [x] [Nesting](https://comark.dev/syntax/markdown#nested-components)
-  - [x] [YAML Props](https://comark.dev/syntax/markdown#yaml-props)
-  - [x] [Slots](https://comark.dev/syntax/markdown#component-slots)
-- [x] [Inline Components](https://comark.dev/syntax/markdown#inline-components)
+  - [x] [YAML Props](https://comark.dev/syntax/components#yaml-props-use-cases)
+  - [x] [Slots](https://comark.dev/syntax/components#component-slots)
+- [x] [Inline Components](https://comark.dev/syntax/components#inline-components)
 - [x] [Inline Props](https://comark.dev/syntax/markdown#attributes)
 - [x] [Span](https://comark.dev/syntax/markdown#span-text)
 - ~~Frontmatter~~. Frontmatter is not built-in in this plugin, we recommend using [`@mdit-vue/plugin-frontmatter`](https://github.com/mdit-vue/mdit-vue/tree/main/packages/plugin-frontmatter) if you want to use this plugin outside of Comark package,
