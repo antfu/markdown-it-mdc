@@ -1,15 +1,25 @@
 import type MarkdownIt from 'markdown-it'
 
 export interface MdcInlineSpanOptions {
-
+  /**
+   * Skip footnote-like syntax `[^...]` to avoid conflicts with footnote plugins.
+   *
+   * @default true
+   */
+  skipFootnoteLike?: boolean
 }
 
-export const MarkdownItInlineSpan: MarkdownIt.PluginWithOptions<MdcInlineSpanOptions> = (md) => {
+export const MarkdownItInlineSpan: MarkdownIt.PluginWithOptions<MdcInlineSpanOptions> = (md, options = {}) => {
+  const { skipFootnoteLike = true } = options
+
   md.inline.ruler.before('link', 'mdc_inline_span', (state, silent) => {
     const start = state.pos
     const char = state.src[start]
 
     if (char !== '[')
+      return false
+
+    if (skipFootnoteLike && state.src[start + 1] === '^')
       return false
 
     let index = start + 1
