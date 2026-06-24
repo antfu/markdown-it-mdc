@@ -1,5 +1,6 @@
 import type MarkdownIt from 'markdown-it'
 import type Renderer from 'markdown-it/lib/renderer.mjs'
+import type Token from 'markdown-it/lib/token.mjs'
 
 import TokenClass from 'markdown-it/lib/token.mjs'
 import { searchProps } from '../parse/props'
@@ -64,24 +65,11 @@ export const MarkdownItInlineProps: MarkdownIt.PluginWithOptions<MdcInlinePropsO
         return
 
       // list item handling
-      if (token.hidden && next.type === 'inline')
+      if (token.hidden && next?.type === 'inline')
         token = next
 
-      if (
-        token.type === 'inline'
-        && token.children?.length === 2
-        && token.children[0].type === 'text'
-        && token.children[1].type === 'mdc_inline_props'
-      ) {
-        const props = token.children[1].attrs
-        token.children.splice(1, 1)
-        props?.forEach(([key, value]) => {
-          if (key === 'class')
-            prev.attrJoin('class', value)
-          else
-            prev.attrSet(key, value)
-        })
-      }
+      if (token.type === 'inline')
+        applyTrailingPropsToParent(token, prev)
     })
 
     // When using `::ul` syntax, to wrap with a list,
@@ -124,6 +112,44 @@ export const MarkdownItInlineProps: MarkdownIt.PluginWithOptions<MdcInlinePropsO
   // Support https://github.com/serkodev/markdown-exit/blob/fe1351070a5841426223ab4a0a5c7874ba2b1257/packages/markdown-exit/src/renderer.ts#L389
   if ('renderInlineAsync' in md.renderer)
     md.renderer.renderInlineAsync = wrapRenderInline(md.renderer.renderInlineAsync as any)
+}
+
+function applyAttrs(token: Token, attrs: [string, string][] | null) {
+  attrs?.forEach(([key, value]) => {
+    if (key === 'class')
+      token.attrJoin('class', value)
+    else
+      token.attrSet(key, value)
+  })
+}
+
+function applyTrailingPropsToParent(inline: Token, parentOpen: Token) {
+  const children = inline.children
+  if (!children || children.length < 2)
+    return false
+
+  const propsIndex = children.length - 1
+  const props = children[propsIndex]
+  const previous = children[propsIndex - 1]
+
+  if (
+    props.type !== 'mdc_inline_props'
+    || previous.type !== 'text'
+  ) {
+    return false
+  }
+
+  applyAttrs(parentOpen, props.attrs)
+
+  if (previous.content.trim()) {
+    previous.content = previous.content.replace(/[ \t]+$/, '')
+    children.splice(propsIndex, 1)
+  }
+  else {
+    children.splice(propsIndex - 1, 2)
+  }
+
+  return true
 }
 
 function wrapRenderInline(renderInline: Renderer['renderInline']): Renderer['renderInline'] {
@@ -170,12 +196,7 @@ function wrapRenderInline(renderInline: Renderer['renderInline']): Renderer['ren
 
         // console.log('apply', token.attrs, 'to', prev)
 
-        token.attrs?.forEach(([key, value]) => {
-          if (key === 'class')
-            prev.attrJoin('class', value)
-          else
-            prev.attrSet(key, value)
-        })
+        applyAttrs(prev, token.attrs)
       }
     })
     return renderInline.call(this, tokens, options, env)
