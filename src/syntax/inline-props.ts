@@ -72,33 +72,46 @@ export const MarkdownItInlineProps: MarkdownIt.PluginWithOptions<MdcInlinePropsO
         applyTrailingPropsToParent(token, prev)
     })
 
-    // When using `::ul` syntax, to wrap with a list,
-    // we deduplicate the `ul` tag and hide the original one
-    // when it's exactly the only child of the `mdc_block_open` token
+    // When `::ul` or `::ol` wraps markdown list content, markdown-it creates
+    // a nested list token with the same tag as the outer `mdc_block`.
+    // Hide that inner list only when it is the block's sole child.
+
+    const listTypes = {
+      bullet_list_open: {
+        closeType: 'bullet_list_close',
+        tag: 'ul'
+      },
+      ordered_list_open: {
+        closeType: 'ordered_list_close',
+        tag: 'ol'
+      }
+    } as const
+
     tokens.forEach((tokenOpen, index) => {
-      if (tokenOpen.type !== 'bullet_list_open')
+      const list = listTypes[tokenOpen.type as keyof typeof listTypes]
+      if (!list)
         return
 
       const prev = tokens[index - 1]
-      if (!prev || prev.type !== 'mdc_block_open' || prev.tag !== 'ul')
+      if (!prev || prev.type !== 'mdc_block_open' || prev.tag !== list.tag)
         return
 
       // find the matching close token
       let closeIndex = index + 1
       while (closeIndex < tokens.length) {
         const close = tokens[closeIndex]
-        if (close.type === 'bullet_list_close' && close.level === tokenOpen.level)
+        if (close.type === list.closeType && close.level === tokenOpen.level)
           break
         closeIndex += 1
       }
       const tokenClose = tokens[closeIndex]
-      if (tokenClose.type !== 'bullet_list_close')
+      if (tokenClose.type !== list.closeType)
         return
 
-      // when prev and next are both `mdc_block` and `ul`,
-      // we hide the original `ul` token
+      // When the matching `mdc_block` close token has the same list tag,
+      // the list tokens are the duplicate wrapper and can be hidden.
       const next = tokens[closeIndex + 1]
-      if (next.type === 'mdc_block_close' && next.tag === 'ul') {
+      if (next.type === 'mdc_block_close' && next.tag === list.tag) {
         tokenOpen.hidden = true
         tokenClose.hidden = true
       }
